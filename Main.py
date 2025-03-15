@@ -2,7 +2,8 @@ from BanditEnv import BanditEnv
 from BanditResults import BanditResults
 from agents.RandomAgent import RandomAgent
 from agents.IncrementalAgent import IncrementalAgent
-from agents.NonStationaryAgent import NonStationaryAgent
+from agents.OptimisticAgent import OptimisticAgent
+
 import matplotlib.pyplot as plt
 
 
@@ -20,13 +21,13 @@ def show_results(bandit_results: type(BanditResults)) -> None:
 if __name__ == "__main__":
 
     NUM_OF_RUNS = 2000
-    NUM_OF_STEPS = 10000
+    NUM_OF_STEPS = 1000
 
     results = BanditResults()
     for run_id in range(NUM_OF_RUNS):
         bandit = BanditEnv(seed=run_id)
         num_of_arms = bandit.action_space
-        agent = NonStationaryAgent(num_of_arms)  # here you might change the agent that you want to use
+        agent = OptimisticAgent(num_of_arms)  # here you might change the agent that you want to use
         best_action = bandit.best_action
         for _ in range(NUM_OF_STEPS):
             action = agent.get_action()
