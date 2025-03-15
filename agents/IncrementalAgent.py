@@ -8,7 +8,7 @@ class IncrementalAgent(BaseAgent):
     This agent learns from incremental rewards.
     """
 
-    def __init__(self, num_of_actions: int, epsilon: float = 0.1):
+    def __init__(self, num_of_actions: int, epsilon:float ):
         self.num_of_actions = num_of_actions
         self.__rewards = [0.0] * num_of_actions
         self.__counts = [0] * num_of_actions
