@@ -17,8 +17,8 @@ class IncrementalAgent(BaseAgent):
     def get_action(self) -> int:
         if random.random() < self.__epsilon:
             return random.randrange(self.num_of_actions)
-        return self.__counts.index(max(self.__counts))
+        return self.__rewards.index(max(self.__rewards))
 
     def learn(self, action, reward) -> None:
         self.__counts[action] += 1
-        self.__rewards[action] += (1/self.__counts[action])* (reward - self.__rewards[action])
+        self.__rewards[action] += (reward - self.__rewards[action])/self.__counts[action]
