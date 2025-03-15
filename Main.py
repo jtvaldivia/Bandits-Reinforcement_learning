@@ -2,7 +2,8 @@ from BanditEnv import BanditEnv
 from BanditResults import BanditResults
 from agents.RandomAgent import RandomAgent
 from agents.IncrementalAgent import IncrementalAgent
-from matplotlib import pyplot as plt
+from agents.NonStationaryAgent import NonStationaryAgent
+import matplotlib.pyplot as plt
 
 
 def show_results(bandit_results: type(BanditResults)) -> None:
@@ -13,22 +14,19 @@ def show_results(bandit_results: type(BanditResults)) -> None:
     for step in range(NUM_OF_STEPS):
         print(f"{step+1}\t{average_rewards[step]:0.3f}\t{optimal_action_percentage[step]:0.3f}")
 
-    plt.plot(optimal_action_percentage)
-    plt.title("Optimal action percentage")
-    plt.savefig("optimal_action_percentage.png")
-    plt.show()
-
+    plt.figure(figsize=(10, 5))
+    # ...
 
 if __name__ == "__main__":
 
     NUM_OF_RUNS = 2000
-    NUM_OF_STEPS = 1000
+    NUM_OF_STEPS = 10000
 
     results = BanditResults()
     for run_id in range(NUM_OF_RUNS):
         bandit = BanditEnv(seed=run_id)
         num_of_arms = bandit.action_space
-        agent = IncrementalAgent(num_of_arms)  # here you might change the agent that you want to use
+        agent = NonStationaryAgent(num_of_arms)  # here you might change the agent that you want to use
         best_action = bandit.best_action
         for _ in range(NUM_OF_STEPS):
             action = agent.get_action()
