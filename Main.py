@@ -4,6 +4,7 @@ from agents.RandomAgent import RandomAgent
 from agents.IncrementalAgent import IncrementalAgent
 from agents.OptimisticAgent import OptimisticAgent
 
+
 import matplotlib.pyplot as plt
 
 
